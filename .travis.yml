@@ -1,10 +1,11 @@
 language: csharp
 solution: ConfigDownloader.sln
+before_deploy: zip SCConfigDownloader.zip *.dll *.txt *.exe
 deploy: 
   provider: releases
   api_key:
     secure: wgjyy1CaeE8dHr+A43KFBqHsmehYEwrmCZuiHNhgEJQZwIy87ETOEtrk33/i9jFzzqCEWvNNXJ0GFo4X+lYYwczquOdT/+9IyrbUHtkAbs3qpXXKsBavLOGM/wIkdKscAVyBGe6m2S153d6zMO0lXG/RvRG+iz5pom3siYhDbNoyfmC4LOe8mA4e4t0I4CvlkYSrkdluGibHJgFlGX9nCjelYXDRX9n0kannMHs0wxqn3VP5injT4iNImsy+mZC6aTg7xcPlsHLy3Uxb3KJYXB/rBYC1lOBD7K2fN/Ph+encO8ODP9DMuVifrtlggFMw9o53Wixhzw5hGhZhkfXXr0poDlT6F8XCBV3C+9wTfe4tS3zlH6bv9f+xTQuaBVozZpNY5xWLWMst8cZYCRcsrXsIB8FyosLBwibWjSnfJvRuziuNS4is3jCxXUYy9mV4LgGe9JwJZHjIjDzjJZiIiIRfli0BrP6nW+2kA/TlqIh2pBSIASIA2dVuWrTHVrCGmqvsYTyMgv0k06bj1Xwe7TDf/ft0d14/5r08LgBiyWZEbme47MBZjBanx9diLpwDvlxK3xtxc3elkxPsUlJMAmWFJDCjpEI3uUEikPt0zoDwoJXoZZH09GqzcjwRIUfShmNzOJY5G+BJajLlNrXMgLRkEoLq95SoygI+STp41Vg=
-  file: bin/Debug/sccdownloader.exe
+  file: bin/Debug/SCConfigDownloader.zip
   skip_cleanup: true
   prerelease: true
   on:
