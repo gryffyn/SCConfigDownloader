@@ -414,7 +414,7 @@ namespace sccdownloader
             }
             else
             {
-                using (var dialog = new SteamLogin())
+                using (var dialog = new SteamLoginFrm())
                 {
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {

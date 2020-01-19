@@ -95,6 +95,12 @@
     <Compile Include="steamGuard.Designer.cs">
       <DependentUpon>SteamGuard.cs</DependentUpon>
     </Compile>
+    <Compile Include="SteamLoginFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SteamLoginFrm.Designer.cs">
+      <DependentUpon>SteamLoginFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SteamWorkshop.cs" />
     <EmbeddedResource Include="main.resx">
       <DependentUpon>main.cs</DependentUpon>
@@ -113,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="steamGuard.resx">
       <DependentUpon>SteamGuard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SteamLoginFrm.resx">
+      <DependentUpon>SteamLoginFrm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\ConfigItem.datasource" />

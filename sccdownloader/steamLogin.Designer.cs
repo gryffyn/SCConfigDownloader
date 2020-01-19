@@ -40,13 +40,25 @@ namespace sccdownloader
             // 
             // usernameInput
             // 
-            this.usernameInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F,
+            this.usernameInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F,
                 System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.usernameInput.Location = new System.Drawing.Point(9, 44);
             this.usernameInput.Name = "usernameInput";
             this.usernameInput.Size = new System.Drawing.Size(382, 44);
             this.usernameInput.TabIndex = 0;
             this.usernameInput.TextChanged += new System.EventHandler(this.usernameInput_TextChanged);
+
+            //
+            // passwordInput
+            //
+            this.passwordInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F,
+                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.passwordInput.Location = new System.Drawing.Point(9, 102);
+            this.passwordInput.Name = "passwordInput";
+            this.passwordInput.PasswordChar = '*';
+            this.passwordInput.Size = new System.Drawing.Size(382, 44);
+            this.passwordInput.TabIndex = 2;
+            this.passwordInput.TextChanged += new System.EventHandler(this.passwordInput_TextChanged);
             //
             // button1
             //
@@ -57,17 +69,6 @@ namespace sccdownloader
             this.button1.TabIndex = 1;
             this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
-            //
-            // passwordInput
-            //
-            this.passwordInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.passwordInput.Location = new System.Drawing.Point(9, 102);
-            this.passwordInput.Name = "passwordInput";
-            this.passwordInput.PasswordChar = '*';
-            this.passwordInput.Size = new System.Drawing.Size(382, 44);
-            this.passwordInput.TabIndex = 2;
-            this.passwordInput.TextChanged += new System.EventHandler(this.passwordInput_TextChanged);
             //
             // rememberLogin
             //
