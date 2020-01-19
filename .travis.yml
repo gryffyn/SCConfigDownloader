@@ -1,5 +1,5 @@
 language: csharp
-solution: sccdownloader.sln
+solution: ConfigDownloader.sln
 deploy: 
   provider: releases
   api_key:
