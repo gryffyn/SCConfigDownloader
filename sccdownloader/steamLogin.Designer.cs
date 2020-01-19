@@ -127,20 +127,5 @@ namespace sccdownloader
         private System.Windows.Forms.CheckBox rememberLogin;
         private System.Windows.Forms.TextBox passwordInput;
         private System.Windows.Forms.TextBox usernameInput;
-
-        public String getPassword()
-        {
-            return passwordInput.Text;
-        }
-
-        public String getUsername()
-        {
-            return usernameInput.Text;
-        }
-
-        public bool getRememberLogin()
-        {
-            return rememberLogin.Checked;
-        }
     }
 }

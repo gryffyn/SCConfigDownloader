@@ -70,10 +70,5 @@ namespace sccdownloader
         #endregion
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox codeInput;
-
-        public String getCodeInput()
-        {
-            return codeInput.Text;
-        }
     }
 }

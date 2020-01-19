@@ -55,7 +55,9 @@ namespace sccdownloader
 
         void steam_connection()
         {
-            SteamDirectory.Initialize();
+            ISteamConfigurationBuilder configurationBuilder;
+            SteamConfiguration.Create(configurationBuilder);
+            SteamDirectory.LoadAsync(SteamConfiguration.Create());
 
             steamClient = new SteamClient();
             steamWorkshop = new SteamWorkshop();
@@ -86,7 +88,7 @@ namespace sccdownloader
             }
         }
 
-        void OnConnected(SteamClient.ConnectedCallback callback)
+        void OnConnected(SteamClient callback)
         {
             setStatus("Connected to Steam!");
 
@@ -109,7 +111,7 @@ namespace sccdownloader
                     sentryHash = CryptoHelper.SHAHash(sentryFile);
                 }
 
-                steamUser.LogOn(new SteamUser.LogOnDetails()
+                steamUser.LogOn(new SteamUser.LogOnDetails
                 {
                     Username = username,
                     Password = password,
@@ -472,31 +474,22 @@ namespace sccdownloader
                     if (item.URL == "")
                     {
                         var callback = await steamWorkshop.RequestInfo(241100, item.Details.publishedfileid);
-
                         var itemInfo = callback.Items.FirstOrDefault();
-
                         var ticket = await steamClient.GetHandler<SteamApps>().GetAppOwnershipTicket(241100);
-
                         var decryptKey = await steamClient.GetHandler<SteamApps>().GetDepotDecryptionKey(241100, 241100);
-
                         var cdn = new CDNClient(steamClient, ticket.Ticket);
-
-                        var servers = cdn.FetchServerList();
-
-                        cdn.Connect(servers.First());
-                        cdn.AuthenticateDepot(241100, decryptKey.DepotKey);
-
-                        var manifest = cdn.DownloadManifest(241100, itemInfo.ManifestID);
+                        // var servers = cdn.FetchServerList();
+                        var servers = await cdn.FetchServerListAsync();
+                        await cdn.ConnectAsync(servers.First());
+                        await cdn.AuthenticateDepotAsync(241100, decryptKey.DepotKey);
+                        var manifest = await cdn.DownloadManifestAsync(241100, itemInfo.ManifestID);
                         manifest.DecryptFilenames(decryptKey.DepotKey);
-
-                        if (manifest.Files.First().TotalSize == 0)
+                        if (manifest.Files.Count == 0)
                         {
                             MessageBox.Show("Steam Refused Download Request");
                             return;
                         }
-
-                        var chunk = cdn.DownloadDepotChunk(241100, manifest.Files.First().Chunks.First());
-
+                        var chunk = cdn.DownloadDepotChunkAsync(241100, manifest.Files.First().Chunks.First());
                         if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                         {
                             using (var wc = new WebClient())

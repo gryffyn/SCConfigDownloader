@@ -34,5 +34,20 @@ namespace sccdownloader
         {
             updateInputs();
         }
+
+        public string getPassword()
+        {
+            return passwordInput.Text;
+        }
+
+        public string getUsername()
+        {
+            return usernameInput.Text;
+        }
+
+        public bool getRememberLogin()
+        {
+            return rememberLogin.Checked;
+        }
     }
 }

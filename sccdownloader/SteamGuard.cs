@@ -21,5 +21,10 @@ namespace sccdownloader
         {
 
         }
+
+        public string getCodeInput()
+        {
+            return codeInput.Text;
+        }
     }
 }
