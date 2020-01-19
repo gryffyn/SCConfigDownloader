@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace configdownloader
+namespace sccdownloader
 {
-    public partial class steamGuard : Form
+    public partial class SteamGuard : Form
     {
-        public steamGuard()
+        public SteamGuard()
         {
             InitializeComponent();
         }

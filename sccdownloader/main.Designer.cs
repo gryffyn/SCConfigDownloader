@@ -1,4 +1,4 @@
-﻿namespace configdownloader
+﻿namespace sccdownloader
 {
     partial class main
     {
@@ -41,18 +41,20 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.currentStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridConfigs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.configItemBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.datagridConfigs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.configItemBindingSource)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // inputAppID
             // 
-            this.inputAppID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputAppID.Location = new System.Drawing.Point(55, 6);
+            this.inputAppID.Anchor =
+                ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top |
+                                                        System.Windows.Forms.AnchorStyles.Left) |
+                                                       System.Windows.Forms.AnchorStyles.Right)));
+            this.inputAppID.Location = new System.Drawing.Point(64, 7);
             this.inputAppID.Name = "inputAppID";
-            this.inputAppID.Size = new System.Drawing.Size(659, 20);
+            this.inputAppID.Size = new System.Drawing.Size(768, 23);
             this.inputAppID.TabIndex = 0;
             this.inputAppID.TextChanged += new System.EventHandler(this.inputAppID_TextChanged);
             this.inputAppID.KeyUp += new System.Windows.Forms.KeyEventHandler(this.inputAppID_KeyUp);
@@ -60,18 +62,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(14, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.Size = new System.Drawing.Size(40, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "AppID";
             // 
             // get
             // 
-            this.get.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.get.Location = new System.Drawing.Point(720, 6);
+            this.get.Anchor =
+                ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Right)));
+            this.get.Location = new System.Drawing.Point(840, 7);
             this.get.Name = "get";
-            this.get.Size = new System.Drawing.Size(75, 20);
+            this.get.Size = new System.Drawing.Size(87, 23);
             this.get.TabIndex = 2;
             this.get.Text = "Get";
             this.get.UseVisualStyleBackColor = true;
@@ -82,28 +86,29 @@
             this.datagridConfigs.AllowUserToAddRows = false;
             this.datagridConfigs.AllowUserToDeleteRows = false;
             this.datagridConfigs.AllowUserToResizeRows = false;
-            this.datagridConfigs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.datagridConfigs.Anchor =
+                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
+                                                         System.Windows.Forms.AnchorStyles.Bottom) |
+                                                        System.Windows.Forms.AnchorStyles.Left) |
+                                                       System.Windows.Forms.AnchorStyles.Right)));
             this.datagridConfigs.AutoGenerateColumns = false;
             this.datagridConfigs.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            this.datagridConfigs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridConfigs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.appDataGridViewTextBoxColumn,
-            this.nameDataGridViewTextBoxColumn,
-            this.RatesUp,
-            this.RatesDown});
+            this.datagridConfigs.ColumnHeadersHeightSizeMode =
+                System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridConfigs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
+                {this.appDataGridViewTextBoxColumn, this.nameDataGridViewTextBoxColumn, this.RatesUp, this.RatesDown});
             this.datagridConfigs.DataSource = this.configItemBindingSource;
             this.datagridConfigs.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.datagridConfigs.Location = new System.Drawing.Point(12, 32);
+            this.datagridConfigs.Location = new System.Drawing.Point(14, 37);
             this.datagridConfigs.MultiSelect = false;
             this.datagridConfigs.Name = "datagridConfigs";
             this.datagridConfigs.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.datagridConfigs.RowHeadersVisible = false;
             this.datagridConfigs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datagridConfigs.Size = new System.Drawing.Size(783, 302);
+            this.datagridConfigs.Size = new System.Drawing.Size(913, 348);
             this.datagridConfigs.TabIndex = 3;
-            this.datagridConfigs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            this.datagridConfigs.CellDoubleClick +=
+                new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // appDataGridViewTextBoxColumn
             // 
@@ -132,7 +137,7 @@
             // 
             // configItemBindingSource
             // 
-            this.configItemBindingSource.DataSource = typeof(configdownloader.ConfigItem);
+            this.configItemBindingSource.DataSource = typeof(sccdownloader.ConfigItem);
             // 
             // saveFileDialog1
             // 
@@ -140,11 +145,11 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.currentStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 342);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.currentStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 398);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(803, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(937, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -156,9 +161,9 @@
             // 
             // main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 364);
+            this.ClientSize = new System.Drawing.Size(937, 420);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.datagridConfigs);
             this.Controls.Add(this.get);
@@ -168,13 +173,12 @@
             this.Text = "Steam Controller Config Downloader";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.main_FormClosed);
             this.Load += new System.EventHandler(this.main_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.datagridConfigs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.configItemBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.datagridConfigs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.configItemBindingSource)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

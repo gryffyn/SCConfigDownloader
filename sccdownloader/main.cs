@@ -14,7 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace configdownloader
+namespace sccdownloader
 {
     public partial class main : Form
     {
@@ -142,11 +142,11 @@ namespace configdownloader
 
                 if (callback.Result == EResult.AccountLogonDenied)
                 {
-                    using (var dialog = new steamGuard())
+                    using (var dialog = new SteamGuard())
                     {
                         if (dialog.ShowDialog() == DialogResult.OK)
                         {
-                            steamguard = dialog.codeInput.Text;
+                            steamguard = dialog.getCodeInput();
                             steamClient.Connect();
                             return;
                         }
@@ -154,11 +154,11 @@ namespace configdownloader
                 }
                 else if (callback.Result == EResult.AccountLoginDeniedNeedTwoFactor || callback.Result == EResult.TwoFactorCodeMismatch)
                 {
-                    using (var dialog = new steamGuard())
+                    using (var dialog = new SteamGuard())
                     {
                         if (dialog.ShowDialog() == DialogResult.OK)
                         {
-                            twofactor = dialog.codeInput.Text;
+                            twofactor = dialog.getCodeInput();
                             steamClient.Connect();
                             return;
                         }
@@ -375,10 +375,6 @@ namespace configdownloader
                             }
                             else if (tag.key == "visibility" || tag.key == "deleted" || tag.key == "owner" || tag.key == "autosave")
                                 continue;
-                            else
-                            {
-
-                            }
                         }
 
                         Invoke(new MethodInvoker(delegate
@@ -416,13 +412,13 @@ namespace configdownloader
             }
             else
             {
-                using (var dialog = new steamLogin())
+                using (var dialog = new SteamLogin())
                 {
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {
-                        username = dialog.usernameInput.Text;
-                        password = dialog.passwordInput.Text;
-                        rememberLogin = dialog.rememberLogin.Checked;
+                        username = dialog.getPassword();
+                        password = dialog.getUsername();
+                        rememberLogin = dialog.getRememberLogin();
                     }
                 }
             }
