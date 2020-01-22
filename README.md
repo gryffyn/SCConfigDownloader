@@ -1,6 +1,6 @@
 # Steam Controller Config Downloader
 
-[![Build Status](https://travis-ci.com/gryffyn/SCConfigDownloader.svg?branch=master)](https://travis-ci.com/gryffyn/SCConfigDownloader)
+[![Build Status](https://travis-ci.com/gryffyn/SCConfigDownloader.svg?branch=dev-steamkit2_2)](https://travis-ci.com/gryffyn/SCConfigDownloader)
 
 Simple tool to download configuration files for non-steam versions of games.
 
