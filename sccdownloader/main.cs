@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteamKit2.Discovery;
 
 namespace sccdownloader
 {
@@ -55,11 +56,34 @@ namespace sccdownloader
 
         void steam_connection()
         {
-            SteamDirectory.Initialize();
+            uint cellid =0;
 
-            steamClient = new SteamClient();
+            // if we've previously connected and saved our cellid, load it.
+            if ( File.Exists( "cellid.txt" ) )
+            {
+                if ( !uint.TryParse( File.ReadAllText( "cellid.txt"), out cellid ) )
+                {
+                    Console.WriteLine( "Error parsing cellid from cellid.txt. Continuing with cellid 0." );
+                    Log.w("Error parsing cellid from cellid.txt. Continuing with cellid 0.");
+                    cellid = 0;
+                }
+                else
+                {
+                    Console.WriteLine( $"Using persisted cell ID {cellid}" );
+                    Log.w($"Using persisted cell ID {cellid}");
+                }
+            }
+
+            var config = SteamConfiguration.Create(b =>
+                b.WithCellID(cellid)
+                    .WithServerListProvider(new FileStorageServerListProvider("servers_list.bin")));
+            Log.w("Created new server list");
+
+            steamClient = new SteamClient(config);
+            Log.w("Creating client...");
             steamWorkshop = new SteamWorkshop();
-
+            SteamDirectory.LoadAsync(config);
+            Log.w("Loading steam directory");
             steamClient.AddHandler(steamWorkshop);
 
             manager = new CallbackManager(steamClient);
@@ -74,7 +98,7 @@ namespace sccdownloader
             manager.Subscribe<SteamUser.LoginKeyCallback>(OnLoginKey);
 
             steamClient.Connect();
-
+            Log.w("Connecting to steam...");
             while (isRunning)
             {
                 try {
@@ -89,12 +113,14 @@ namespace sccdownloader
         void OnConnected(SteamClient.ConnectedCallback callback)
         {
             setStatus("Connected to Steam!");
+            Log.w("Connected!");
 
+            /*
             if (callback.Result != EResult.OK)
             {
                 MessageBox.Show("Failed to connect to steam");
-                Application.Exit();    
-            }
+                Environment.Exit(0);
+            } */
 
             if (string.IsNullOrEmpty(username))
                 steamUser.LogOnAnonymous();
@@ -104,12 +130,13 @@ namespace sccdownloader
 
                 if (File.Exists("steamguard.bin"))
                 {
+                    Log.w("Steam Guard exists, using existing config");
                     // if we have a saved sentry file, read and sha-1 hash it
                     byte[] sentryFile = File.ReadAllBytes("steamguard.bin");
                     sentryHash = CryptoHelper.SHAHash(sentryFile);
                 }
 
-                steamUser.LogOn(new SteamUser.LogOnDetails()
+                steamUser.LogOn(new SteamUser.LogOnDetails
                 {
                     Username = username,
                     Password = password,
@@ -125,6 +152,7 @@ namespace sccdownloader
         void OnDisconnect(SteamClient.DisconnectedCallback callback)
         {
             setStatus("Disconnected from Steam!");
+            Log.w("disconnected from Steam");
 
             if (doReconnect && !callback.UserInitiated)
             {
@@ -152,7 +180,8 @@ namespace sccdownloader
                         }
                     }
                 }
-                else if (callback.Result == EResult.AccountLoginDeniedNeedTwoFactor || callback.Result == EResult.TwoFactorCodeMismatch)
+                else if (callback.Result == EResult.AccountLoginDeniedNeedTwoFactor ||
+                         callback.Result == EResult.TwoFactorCodeMismatch)
                 {
                     using (var dialog = new SteamGuard())
                     {
@@ -164,16 +193,23 @@ namespace sccdownloader
                         }
                     }
                 }
-                
-                MessageBox.Show("Failed to connect to steam");
-                Application.Exit();
+
+                MessageBox.Show("Failed to connect to Steam.");
+                Environment.Exit(0);
             }
+            else if (callback.Result == EResult.OK)
+            {
+                isReady = true;
+                doReconnect = true;
+                steamguard = twofactor = "";
+                File.WriteAllText( "cellid.txt", callback.CellID.ToString() );
 
-            isReady = true;
-            doReconnect = true;
-            steamguard = twofactor = "";
-
-            setStatus("Logged to Steam!");
+                setStatus("Logged to Steam!");
+            }
+            else
+            {
+                throw new ConnectionException("Failed to connect to Steam.");
+            }
         }
 
         private void OnLoginKey(SteamUser.LoginKeyCallback callback)
@@ -405,6 +441,7 @@ namespace sccdownloader
 
             if (File.Exists("login.dat"))
             {
+                Log.w("Login data exists, using existing data.");
                 var f = File.ReadAllText("login.dat").Split('|');
                 username = f[0];
                 loginkey = f[1];
@@ -412,12 +449,13 @@ namespace sccdownloader
             }
             else
             {
-                using (var dialog = new SteamLogin())
+                Log.w("Opening login form");
+                using (var dialog = new SteamLoginFrm())
                 {
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {
-                        username = dialog.getPassword();
-                        password = dialog.getUsername();
+                        username = dialog.getUsername();
+                        password = dialog.getPassword();
                         rememberLogin = dialog.getRememberLogin();
                     }
                 }
@@ -472,39 +510,37 @@ namespace sccdownloader
                     if (item.URL == "")
                     {
                         var callback = await steamWorkshop.RequestInfo(241100, item.Details.publishedfileid);
-
                         var itemInfo = callback.Items.FirstOrDefault();
-
                         var ticket = await steamClient.GetHandler<SteamApps>().GetAppOwnershipTicket(241100);
-
                         var decryptKey = await steamClient.GetHandler<SteamApps>().GetDepotDecryptionKey(241100, 241100);
-
                         var cdn = new CDNClient(steamClient, ticket.Ticket);
-
-                        var servers = cdn.FetchServerList();
-
-                        cdn.Connect(servers.First());
-                        cdn.AuthenticateDepot(241100, decryptKey.DepotKey);
-
-                        var manifest = cdn.DownloadManifest(241100, itemInfo.ManifestID);
+                        // var servers = cdn.FetchServerList();
+                        var servers = await cdn.FetchServerListAsync();
+                        int i = 0;
+                        foreach (CDNClient.Server server in servers)
+                        {
+                            Log.w($"Server{i}: {server}");
+                            ++i;
+                        }
+                        await cdn.ConnectAsync(servers.First());
+                        await cdn.AuthenticateDepotAsync(241100, decryptKey.DepotKey);
+                        var manifest = await cdn.DownloadManifestAsync(241100, itemInfo.ManifestID);
                         manifest.DecryptFilenames(decryptKey.DepotKey);
-
-                        if (manifest.Files.First().TotalSize == 0)
+                        if (manifest.Files.Count == 0)
                         {
                             MessageBox.Show("Steam Refused Download Request");
                             return;
                         }
-
-                        var chunk = cdn.DownloadDepotChunk(241100, manifest.Files.First().Chunks.First());
-
+                        var chunk = cdn.DownloadDepotChunkAsync(241100, manifest.Files.First().Chunks.First());
                         if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                         {
                             using (var wc = new WebClient())
                             {
                                 using (var io = saveFileDialog1.OpenFile())
                                 {
-                                    io.Write(chunk.Data, 0, chunk.Data.Length);
-                                    MessageBox.Show("Download Done!");
+                                    io.Write(chunk.Result.Data, 0, chunk.Result.Data.Length);
+                                    MessageBox.Show($"Download Done!\nSaved {saveFileDialog1.FileName}");
+                                    Log.w($"Downloaded {saveFileDialog1.FileName}");
                                 }
                             }
                         }
@@ -549,4 +585,5 @@ namespace sccdownloader
             }
         }
     }
+
 }

@@ -1,12 +1,11 @@
-﻿using System;
-
+using System;
 using System.Windows.Forms;
 
 namespace sccdownloader
 {
-    public partial class SteamLogin : Form
+    public partial class SteamLoginFrm : Form
     {
-        public SteamLogin()
+        public SteamLoginFrm()
         {
             InitializeComponent();
         }
@@ -18,11 +17,13 @@ namespace sccdownloader
 
         private void button2_Click(object sender, EventArgs e)
         {
+            textBox1.Text = "";
+            textBox2.Text = "";
         }
 
         void updateInputs()
         {
-            button2.Enabled = usernameInput.Text == "" && passwordInput.Text == "";
+            button2.Enabled = textBox1.Text == "" && textBox2.Text == "";
         }
 
         private void usernameInput_TextChanged(object sender, EventArgs e)
@@ -33,6 +34,21 @@ namespace sccdownloader
         private void passwordInput_TextChanged(object sender, EventArgs e)
         {
             updateInputs();
+        }
+
+        public string getPassword()
+        {
+            return textBox2.Text;
+        }
+
+        public string getUsername()
+        {
+            return textBox1.Text;
+        }
+
+        public bool getRememberLogin()
+        {
+            return checkBox1.Checked;
         }
     }
 }
