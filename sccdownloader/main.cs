@@ -56,7 +56,7 @@ namespace sccdownloader
 
         void steam_connection()
         {
-            var cellid = 0u;
+            uint cellid =0;
 
             // if we've previously connected and saved our cellid, load it.
             if ( File.Exists( "cellid.txt" ) )
@@ -194,7 +194,7 @@ namespace sccdownloader
                     }
                 }
 
-                MessageBox.Show("Failed to connect to steam");
+                MessageBox.Show("Failed to connect to Steam.");
                 Environment.Exit(0);
             }
             else if (callback.Result == EResult.OK)
@@ -202,12 +202,13 @@ namespace sccdownloader
                 isReady = true;
                 doReconnect = true;
                 steamguard = twofactor = "";
+                File.WriteAllText( "cellid.txt", callback.CellID.ToString() );
 
                 setStatus("Logged to Steam!");
             }
             else
             {
-                
+                throw new ConnectionException("Failed to connect to Steam.");
             }
         }
 
@@ -515,6 +516,12 @@ namespace sccdownloader
                         var cdn = new CDNClient(steamClient, ticket.Ticket);
                         // var servers = cdn.FetchServerList();
                         var servers = await cdn.FetchServerListAsync();
+                        int i = 0;
+                        foreach (CDNClient.Server server in servers)
+                        {
+                            Log.w($"Server{i}: {server}");
+                            ++i;
+                        }
                         await cdn.ConnectAsync(servers.First());
                         await cdn.AuthenticateDepotAsync(241100, decryptKey.DepotKey);
                         var manifest = await cdn.DownloadManifestAsync(241100, itemInfo.ManifestID);
@@ -532,7 +539,8 @@ namespace sccdownloader
                                 using (var io = saveFileDialog1.OpenFile())
                                 {
                                     io.Write(chunk.Result.Data, 0, chunk.Result.Data.Length);
-                                    MessageBox.Show("Download Done!");
+                                    MessageBox.Show($"Download Done!\nSaved {saveFileDialog1.FileName}");
+                                    Log.w($"Downloaded {saveFileDialog1.FileName}");
                                 }
                             }
                         }
