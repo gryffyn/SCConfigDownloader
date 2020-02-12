@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd bin/Release/
+cd sccdownloader/bin/Release/
 zip SCConfigDownloader.zip *.dll *.txt *.exe
