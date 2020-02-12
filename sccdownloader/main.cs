@@ -130,6 +130,7 @@ namespace sccdownloader
 
                 if (File.Exists("steamguard.bin"))
                 {
+                    Log.w("Steam Guard exists, using existing config");
                     // if we have a saved sentry file, read and sha-1 hash it
                     byte[] sentryFile = File.ReadAllBytes("steamguard.bin");
                     sentryHash = CryptoHelper.SHAHash(sentryFile);
@@ -151,6 +152,7 @@ namespace sccdownloader
         void OnDisconnect(SteamClient.DisconnectedCallback callback)
         {
             setStatus("Disconnected from Steam!");
+            Log.w("disconnected from Steam");
 
             if (doReconnect && !callback.UserInitiated)
             {
@@ -165,43 +167,48 @@ namespace sccdownloader
             if (callback.Result != EResult.OK)
             {
                 doReconnect = false;
-            }
-            else if (callback.Result == EResult.AccountLogonDenied)
-            {
-               using (var dialog = new SteamGuard())
-               {
-                    if (dialog.ShowDialog() == DialogResult.OK)
-                    {
-                        steamguard = dialog.getCodeInput();
-                        steamClient.Connect();
-                        return;
-                    }
-               }
-            }
-            else if (callback.Result == EResult.AccountLoginDeniedNeedTwoFactor || callback.Result == EResult.TwoFactorCodeMismatch)
-            {
-                using (var dialog = new SteamGuard())
+
+                if (callback.Result == EResult.AccountLogonDenied)
                 {
-                    if (dialog.ShowDialog() == DialogResult.OK)
+                    using (var dialog = new SteamGuard())
                     {
-                        twofactor = dialog.getCodeInput();
-                        steamClient.Connect();
-                        return;
+                        if (dialog.ShowDialog() == DialogResult.OK)
+                        {
+                            steamguard = dialog.getCodeInput();
+                            steamClient.Connect();
+                            return;
+                        }
                     }
                 }
+                else if (callback.Result == EResult.AccountLoginDeniedNeedTwoFactor ||
+                         callback.Result == EResult.TwoFactorCodeMismatch)
+                {
+                    using (var dialog = new SteamGuard())
+                    {
+                        if (dialog.ShowDialog() == DialogResult.OK)
+                        {
+                            twofactor = dialog.getCodeInput();
+                            steamClient.Connect();
+                            return;
+                        }
+                    }
+                }
+
+                MessageBox.Show("Failed to connect to steam");
+                Environment.Exit(0);
+            }
+            else if (callback.Result == EResult.OK)
+            {
+                isReady = true;
+                doReconnect = true;
+                steamguard = twofactor = "";
+
+                setStatus("Logged to Steam!");
             }
             else
             {
-                MessageBox.Show("Failed to connect to steam");
-                Environment.Exit(0);
-                Environment.Exit(0);
+                
             }
-
-            isReady = true;
-            doReconnect = true;
-            steamguard = twofactor = "";
-
-            setStatus("Logged to Steam!");
         }
 
         private void OnLoginKey(SteamUser.LoginKeyCallback callback)
