@@ -17,6 +17,8 @@ namespace sccdownloader
 
         private void button2_Click(object sender, EventArgs e)
         {
+            textBox1.Text = "";
+            textBox2.Text = "";
         }
 
         void updateInputs()

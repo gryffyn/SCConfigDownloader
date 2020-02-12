@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="ConfigItem.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="main.cs">
       <SubType>Form</SubType>
     </Compile>

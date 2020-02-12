@@ -54,27 +54,27 @@ namespace sccdownloader
             //
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.button1.Location = new System.Drawing.Point(318, 127);
+            this.button1.Location = new System.Drawing.Point(361, 127);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 24);
             this.button1.TabIndex = 4;
             this.button1.Text = "Login";
             this.button1.UseVisualStyleBackColor = true;
             //
             // textBox1
             //
-            this.textBox1.Location = new System.Drawing.Point(12, 53);
+            this.textBox1.Location = new System.Drawing.Point(12, 69);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(381, 23);
+            this.textBox1.Size = new System.Drawing.Size(424, 23);
             this.textBox1.TabIndex = 5;
-            this.textBox1.UseSystemPasswordChar = true;
+            //this.textBox1.UseSystemPasswordChar = true;
             //
             // textBox2
             //
-            this.textBox2.Location = new System.Drawing.Point(12, 82);
+            this.textBox2.Location = new System.Drawing.Point(12, 98);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(381, 23);
+            this.textBox2.Size = new System.Drawing.Size(424, 23);
             this.textBox2.TabIndex = 6;
             this.textBox2.UseSystemPasswordChar = true;
             //
@@ -84,16 +84,18 @@ namespace sccdownloader
             this.label1.ForeColor = System.Drawing.SystemColors.InfoText;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(390, 41);
+            this.label1.Size = new System.Drawing.Size(424, 57);
             this.label1.TabIndex = 7;
             this.label1.Text = "Anonymous accounts can list items, but download requires login.\r\nGame ownership i" +
                                "s not required, so you should use dummy account.\r\n";
             //
             // button2
             //
-            this.button2.Location = new System.Drawing.Point(197, 127);
+            button2.Click += button2_Click;
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button2.Location = new System.Drawing.Point(240, 127);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 23);
+            this.button2.Size = new System.Drawing.Size(115, 24);
             this.button2.TabIndex = 8;
             this.button2.Text = "Anonymous Login";
             this.button2.UseVisualStyleBackColor = true;
@@ -103,8 +105,9 @@ namespace sccdownloader
             this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(405, 162);
+            this.ClientSize = new System.Drawing.Size(448, 162);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
