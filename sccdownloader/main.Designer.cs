@@ -41,18 +41,9 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.currentStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.accountInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.accountInfoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize) (this.datagridConfigs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.configItemBindingSource)).BeginInit();
             this.statusStrip1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             //
             // inputAppID
@@ -61,7 +52,7 @@
                 ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top |
                                                         System.Windows.Forms.AnchorStyles.Left) |
                                                        System.Windows.Forms.AnchorStyles.Right)));
-            this.inputAppID.Location = new System.Drawing.Point(58, 27);
+            this.inputAppID.Location = new System.Drawing.Point(58, 12);
             this.inputAppID.Name = "inputAppID";
             this.inputAppID.Size = new System.Drawing.Size(768, 23);
             this.inputAppID.TabIndex = 0;
@@ -71,7 +62,7 @@
             // label1
             //
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 30);
+            this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 15);
             this.label1.TabIndex = 1;
@@ -82,7 +73,7 @@
             this.get.Anchor =
                 ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top |
                                                        System.Windows.Forms.AnchorStyles.Right)));
-            this.get.Location = new System.Drawing.Point(838, 26);
+            this.get.Location = new System.Drawing.Point(838, 12);
             this.get.Name = "get";
             this.get.Size = new System.Drawing.Size(87, 23);
             this.get.TabIndex = 2;
@@ -108,13 +99,13 @@
                 {this.appDataGridViewTextBoxColumn, this.nameDataGridViewTextBoxColumn, this.RatesUp, this.RatesDown});
             this.datagridConfigs.DataSource = this.configItemBindingSource;
             this.datagridConfigs.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.datagridConfigs.Location = new System.Drawing.Point(12, 56);
+            this.datagridConfigs.Location = new System.Drawing.Point(12, 41);
             this.datagridConfigs.MultiSelect = false;
             this.datagridConfigs.Name = "datagridConfigs";
             this.datagridConfigs.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.datagridConfigs.RowHeadersVisible = false;
             this.datagridConfigs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datagridConfigs.Size = new System.Drawing.Size(913, 380);
+            this.datagridConfigs.Size = new System.Drawing.Size(913, 396);
             this.datagridConfigs.TabIndex = 3;
             this.datagridConfigs.CellDoubleClick +=
                 new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
@@ -168,76 +159,16 @@
             this.currentStatus.Size = new System.Drawing.Size(128, 17);
             this.currentStatus.Text = "Connecting to Steam...";
             //
-            // menuStrip1
-            //
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[]
-                {this.fileToolStripMenuItem1, this.accountToolStripMenuItem, this.settingsToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(937, 24);
-            this.menuStrip1.TabIndex = 8;
-            this.menuStrip1.Text = "menuStrip1";
-            //
-            // fileToolStripMenuItem1
-            //
-            this.fileToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[]
-                {this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
-            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem1.Text = "File";
-            //TODO this.fileToolStripMenuItem1.Click += new System.EventHandler(this.fileToolStripMenuItem1_Click);
-            //
-            // accountToolStripMenuItem
-            //
-            this.accountToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[]
-                {this.accountInfoToolStripMenuItem, this.toolStripSeparator1, this.accountInfoToolStripMenuItem1});
-            this.accountToolStripMenuItem.Name = "accountToolStripMenuItem";
-            this.accountToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-            this.accountToolStripMenuItem.Text = "Account";
-            //
-            // settingsToolStripMenuItem
-            //
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            // TODO
-            //settingsToolStripMenuItem.Click += settingsToolStripMenuItem_Click;
-            //
-            // accountInfoToolStripMenuItem
-            //
-            this.accountInfoToolStripMenuItem.Name = "accountInfoToolStripMenuItem";
-            this.accountInfoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.accountInfoToolStripMenuItem.Text = "Re-login";
-            //
-            // accountInfoToolStripMenuItem1
-            //
-            this.accountInfoToolStripMenuItem1.Name = "accountInfoToolStripMenuItem1";
-            this.accountInfoToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.accountInfoToolStripMenuItem1.Text = "Account Info...";
-            //
-            // toolStripSeparator1
-            //
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            //
-            // exitToolStripMenuItem
-            //
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            //
             // main
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(937, 470);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.datagridConfigs);
             this.Controls.Add(this.get);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.inputAppID);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "main";
             this.Text = "SCConfigDownloader";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.main_FormClosed);
@@ -246,8 +177,6 @@
             ((System.ComponentModel.ISupportInitialize) (this.configItemBindingSource)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -266,14 +195,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RatesDown;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel currentStatus;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem accountInfoToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem accountInfoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem accountToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
 
