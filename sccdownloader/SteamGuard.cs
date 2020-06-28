@@ -26,5 +26,10 @@ namespace sccdownloader
         {
             return codeInput.Text;
         }
+
+        private void codeInput_TextChanged(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

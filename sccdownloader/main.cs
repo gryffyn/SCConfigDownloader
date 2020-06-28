@@ -17,11 +17,8 @@ namespace sccdownloader
     public partial class main : Form
     {
         bool isRunning = true;
-
         bool isReady = false;
-
         bool requestOnGoing = false;
-
         uint appidCurrent = 0;
 
         /// <summary>
@@ -30,9 +27,7 @@ namespace sccdownloader
         uint itemsPerPage = 100;
 
         List<Game> Games = new List<Game>();
-
         BindingList<ConfigItem> items = new BindingList<ConfigItem>();
-
         List<string> names = new List<string>();
 
         #region "Steam Connection"
@@ -49,7 +44,7 @@ namespace sccdownloader
         string steamguard;
         string twofactor;
         bool doReconnect = true;
-        bool rememberLogin = false;
+        bool rememberLogin;
 
         void steam_connection()
         {

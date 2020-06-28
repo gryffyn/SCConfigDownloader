@@ -36,39 +36,43 @@ namespace sccdownloader
             // 
             // codeInput
             // 
-            this.codeInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular,
-                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.codeInput.Location = new System.Drawing.Point(14, 14);
+            this.codeInput.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.codeInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.codeInput.Location = new System.Drawing.Point(12, 12);
             this.codeInput.Name = "codeInput";
-            this.codeInput.Size = new System.Drawing.Size(382, 44);
+            this.codeInput.Size = new System.Drawing.Size(205, 44);
             this.codeInput.TabIndex = 0;
-            //
+            this.codeInput.WordWrap = false;
+            this.codeInput.TextChanged += new System.EventHandler(this.codeInput_TextChanged);
+            // 
             // button1
-            //
+            // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(309, 72);
+            this.button1.Location = new System.Drawing.Point(142, 62);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 27);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
-            //
-            // steamGuard
-            //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            // 
+            // SteamGuard
+            // 
+            this.AcceptButton = this.button1;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 103);
+            this.ClientSize = new System.Drawing.Size(229, 89);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.codeInput);
-            this.Name = "steamGuard";
+            this.Name = "SteamGuard";
             this.Text = "Steam Guard Code";
             this.Load += new System.EventHandler(this.steamGuard_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
 
-        #endregion
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox codeInput;
+
+        #endregion
     }
 }
